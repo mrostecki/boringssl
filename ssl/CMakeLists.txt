@@ -40,6 +40,12 @@ add_library(
   tls13_enc.cc
   tls13_server.cc
 )
+if(BUILD_SHARED_LIBS AND SOVERSION)
+  set_target_properties(
+    ssl PROPERTIES
+    SOVERSION ${boringssl_SOVERSION}
+  )
+endif()
 
 target_link_libraries(ssl crypto)
 

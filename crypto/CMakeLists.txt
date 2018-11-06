@@ -205,6 +205,12 @@ add_library(
 
   ${CRYPTO_FIPS_OBJECTS}
 )
+if(BUILD_SHARED_LIBS AND SOVERSION)
+  set_target_properties(
+    crypto PROPERTIES
+    SOVERSION ${boringssl_SOVERSION}
+  )
+endif()
 
 if(FIPS_DELOCATE)
   add_dependencies(crypto bcm_o_target)

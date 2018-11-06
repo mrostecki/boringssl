@@ -35,6 +35,12 @@ add_library(
   $<TARGET_OBJECTS:x509_decrepit>
   $<TARGET_OBJECTS:xts>
 )
+if(BUILD_SHARED_LIBS AND SOVERSION)
+  set_target_properties(
+    decrepit PROPERTIES
+    SOVERSION ${boringssl_SOVERSION}
+  )
+endif()
 
 target_link_libraries(decrepit crypto ssl)
 
